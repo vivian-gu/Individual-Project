@@ -83,7 +83,7 @@ class PeerChatInterface
     if @routing_table[[0, m, n]] != nil
       return InetAddr.new(@routing_table[[0, m, n]][:ip_address], @routing_table[[0, m, n]][:port]), m, n
 
-    # If not,searching the entire routing table for the entry with the GUID closest to the target_id
+      # If not,searching the entire routing table for the entry with the GUID closest to the target_id
     else
       shortestDistance = distancing(target_id, @guid)
       # Sending message on if there is a closer address
@@ -287,7 +287,7 @@ class PeerChatInterface
          (@chatAckWait[tagHash] == 1 || @chatAckWait[tagHash] == 2)
         end
         @chatAckWait[tagHash] = 1 # Set flag guarding chat messages for this node to 1
-        chatMsg = {:type => "CHAT", :target_id => tagHash, :sender_id => @guid, :keytag => unique_tags[i2],
+        chatMsg = {:type => "CHAT", :target_id => tagHash, :sender_id => @guid, :Tag => unique_tags[i2],
                    :post => text}.to_json
         nh, m, n = nextHop(tagHash)
         if tagHash == @guid
@@ -529,10 +529,10 @@ class PeerChatInterface
         if flag
           @postHash << {:text => message["post"]}
         end
-        ackChatMsg = {:type => "ACK_CHAT", :node_id => message["sender_id"], :keytag => message["keytag"]}.to_json
+        ackChatMsg = {:type => "ACK_CHAT", :node_id => message["sender_id"], :Tag => message["Tag"]}.to_json
         if message["sender_id"] == @guid
           puts " "
-          print @name, "CHATTING WITH YOURSELF" # If processes own chatting message, no need to send an ACK
+          print @name, " CHATTING WITH YOURSELF" # If processes own chatting message, no need to send an ACK
           puts " "
           return
         end
@@ -550,7 +550,7 @@ class PeerChatInterface
     # Keep forwarding until this ACK_CHAT message reaches its destination
     if message["type"] == "ACK_CHAT"
       if message["node_id"] == @guid
-        tagHash = Hash_Func(message["keytag"])
+        tagHash = Hash_Func(message["Tag"])
         @chatAckWait[tagHash] = 2
       else
         nh, m, n = nextHop(message["node_id"])

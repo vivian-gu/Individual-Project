@@ -37,13 +37,14 @@ nid = cnode.joinNetwork( InetAddr.new( "127.0.0.1", "8778" ), "Cnode" )
 sleep 10
 puts "*-----------------------*"
 
-puts "Chatting some information"
+puts "Indexing some information"
 
 puts "*-----------------------*"
 
 
 anode.chatPage( "I love Anode", ["Anode"] )
 anode.chatPage( "I love Bnode", ["Bnode"] )
+anode.chatPage( "I want to see Anode and Bnode", ["Bnode"])
 
 bnode.chatPage( "Do you like Bnode", ["Bnode"] )
 
@@ -53,11 +54,11 @@ cnode.chatPage( "I love Anode and Bnode", ["Bnode", "Anode"] )
 sleep 20
 puts "*-----------------------*"
 
-puts "Lets Search for some node with tags"
+puts "Lets chat with some node - searching by tags"
 
 puts "*-----------------------*"
 
-cnode.chat_retrieve( ["Anode"] )
+cnode.chat_retrieve( ["Anode","Bnode"] )
 
 sleep 20
 puts "*-----------------------*"
