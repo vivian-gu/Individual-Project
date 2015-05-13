@@ -22,4 +22,4 @@ And then could run peer_node.rb in seperate command lines to create different pe
 But due to the time constraints, there is still some problems with the code in peer_node.rb.
 
 
-In a word, all required functions are mostly implemented in the PeerchatInterface in PeerChat.rb.
+In a word, all required functions are mostly implemented with PeerchatInterface in PeerChat.rb.
